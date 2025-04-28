@@ -1,0 +1,31 @@
+Here's the Power Automate code for your task:
+
+powershell
+# Trigger to detect incoming emails from Outlook
+$trigger = <<Trigger>>
+@triggerswindowscom
+<<EndTrigger>>
+
+# Action to respond with "Two more weeks" using Microsoft 365 apps integration
+$action = <<Action>>
+@actionsms
+[
+    @sendemail(
+        To: "Your recipients here",
+        Subject: "Message subject here", # Ensure this matches your email's subject
+        MessageBody: "Two more weeks"
+    )
+]
+<<EndAction>>
+
+# Connect to Outlook for email handling
+$Microsoft365AppsIntegration = <<ConnectToMicrosoft365AppsIntegration>>
+@connectmicrosoft365appsintegration(
+    ResourceId: "Your Microsoft 365 resource ID here",
+    ContinueOnFailure: true,
+    UseCustomActionsForSteps: true
+)
+<<EndConnectToMicrosoft365AppsIntegration>>
+
+# Execute the flow automatically when an email is received
+<<ExecuteFlow>>
